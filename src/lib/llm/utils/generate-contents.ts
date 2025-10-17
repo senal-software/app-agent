@@ -15,20 +15,16 @@ import { getLocaleName, LocaleCode } from '@/lib/utils/locale';
 const ContentsResponseSchemaForAppStore = z.object({
   title: z
     .string()
-    .describe(
-      'The title of the app. Max length is 30 characters. Keep the original app title as is and append keywords as a tag line if possible. Put as many characters as possible up to the limit.'
-    )
+    .describe('The title of the app. You must not exceed 30 characters.')
     .optional(),
   subtitle: z
     .string()
-    .describe(
-      'The subtitle of the app. Max length is 30 characters. Put as many characters as possible up to the limit.'
-    )
+    .describe('The subtitle of the app. You must not exceed 30 characters.')
     .optional(),
   description: z
     .string()
     .describe(
-      'The description of the app. Max length is 4000 characters. Incorporate the target keywords into the description naturally as frequent as possible to increase the keyword density. Aim to use the target keywords 6 times or more in the description for each keyword. Especially, the first 3 target keywords must be used as frequently as possible (at least 6 times). Use up the max length of the description field. The longer the better up to the limit.'
+      'The description of the app. It must be just below 4000 characters. You must not exceed 4000 characters.'
     )
     .optional(),
   // keywords: z.string().optional(),
