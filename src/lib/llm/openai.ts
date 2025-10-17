@@ -5,6 +5,7 @@ import { OPENAI_API_KEY } from '@/lib/config';
 
 // TODO: should allow Azure config in the future
 const openai = new OpenAI({
+  baseURL: 'https://openrouter.ai/api/v1',
   apiKey: OPENAI_API_KEY,
 });
 
