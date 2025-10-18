@@ -68,17 +68,89 @@ https://github.com/user-attachments/assets/9148a814-ae24-4005-adb6-d113933b67d3
 
 ## Getting Started
 
-### 1. Clone the repository
+### Option A: Using devenv (Recommended)
+
+[devenv](https://devenv.sh) provides a reproducible development environment with all dependencies pre-configured, including Node.js 22 and PostgreSQL 15.
+
+#### 1. Install devenv
+
+Follow the installation instructions at [devenv.sh/getting-started](https://devenv.sh/getting-started/).
+
+#### 2. Clone the repository
+
+```bash
+git clone https://github.com/ngo275/app-agent.git
+cd app-agent
+```
+
+#### 3. Start devenv services
+
+```bash
+devenv up
+```
+
+This will automatically start PostgreSQL 15 in the background. Keep this terminal running, or run it in detached mode with `devenv up -d`.
+
+#### 4. Enter the devenv shell (in a new terminal)
+
+```bash
+devenv shell
+```
+
+This will automatically:
+
+- Install Node.js 22 with npm
+- Set up PostgreSQL 15 on port 5432
+- Create the `aso` database with user `aso_user`
+- Display version information for all tools
+
+#### 5. Copy .env.sample to .env and change the values
+
+```bash
+cp .env.sample .env
+```
+
+The `DATABASE_URL` for devenv is:
+
+```
+DATABASE_URL="postgresql://aso_user:aso_password@127.0.0.1:5432/aso"
+```
+
+See the environment variables section below for other required values.
+
+#### 6. Install dependencies and set up the database
+
+```bash
+yarn
+yarn prisma generate
+yarn prisma migrate deploy
+```
+
+#### 7. Run the development server
+
+```bash
+yarn dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to see the app.
+
+---
+
+### Option B: Manual Setup
+
+#### 1. Clone the repository
 
 ```bash
 git clone https://github.com/ngo275/app-agent.git
 ```
 
-### 2. Copy .env.sample to .env and change the values
+#### 2. Copy .env.sample to .env and change the values
 
 ```bash
 cp .env.sample .env
 ```
+
+#### Environment Variables
 
 Here's the list of environment variables you need to set:
 
@@ -117,7 +189,7 @@ Here's the list of environment variables you need to set:
 - `DATABASE_URL`
   - The URL of your PostgreSQL database. Beside a local machine, you can use [Supabase](https://supabase.com/) or [Neon](https://neon.tech/) for free services.
 
-### 3. Install dependencies
+#### 3. Install dependencies
 
 ```bash
 yarn
@@ -126,7 +198,7 @@ yarn
 npm install
 ```
 
-### 4. Set up DB
+#### 4. Set up DB
 
 ```bash
 yarn prisma generate
@@ -137,7 +209,7 @@ npm run prisma generate
 npm run prisma migrate deploy
 ```
 
-### 5. Run the development server
+#### 5. Run the development server
 
 ```bash
 yarn dev
